@@ -16,6 +16,22 @@ acl Safe_ports port 591		# filemaker
 acl Safe_ports port 777		# multiling http
 acl CONNECT method CONNECT
 
+# wskazanie programu kodujacego odebrane haslo i plik
+# zawierajacy dane uzytkownikow
+auth_param basic program /usr/lib/squid3/ncsa_auth /etc/squid3/passwd
+# maksymalna liczba obslugiwanych sesji
+auth_param basic children 2
+# komunikat przesylany do przegladarki
+# informujacy o potrzebie uwierzytelnienia
+auth_param basic realm Serwer squid
+# maksymalny czas utrzymywania sesji
+auth_param basic credentialsttl 2 hours
+# wymagane uwierzytelnienie
+acl ncsa_users proxy_auth REQUIRED
+# obsluga uwierzytelnionych uzytkownikow
+http_access allow ncsa_users
+
+
 http_access allow manager localhost
 http_access deny manager
 
