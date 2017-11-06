@@ -31,7 +31,6 @@ acl ncsa_users proxy_auth REQUIRED
 # obsluga uwierzytelnionych uzytkownikow
 http_access allow ncsa_users
 
-
 http_access allow manager localhost
 http_access deny manager
 
